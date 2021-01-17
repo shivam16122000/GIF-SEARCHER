@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div id="imgdiv">
+      <img src="#" />
+    </div>
+    <div>
+      <p id="para" style="color: red; text-align: center; font-size: large"></p>
+      <form id="form">
+        <label for="gif">Search for GIF ........[made by Shivam Tiwari]</label>
+        <input type="text" id="gif" name="gif" placeholder="cats" />
+        <input type="submit" />
+      </form>
+      <button id="button">new image</button>
+    </div>
+
+    <br />
+
+    <script>
+      let variable = 'cats';
+      const para = document.querySelector('#para');
+      const input = document.querySelector('#gif');
+      const form = document.querySelector('#form');
+      const btn = document.querySelector('#button');
+      const img = document.querySelector('img');
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        variable = input.value;
+        console.log(variable);
+        fetch(
+          'https://api.giphy.com/v1/gifs/translate?api_key=YSwyquqeO2YWPFbSgHM1g7ZOo6Cm9s2t&s=' +
+            variable,
+          { mode: 'cors' }
+        )
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (response) {
+            img.src = response.data.images.original.url;
+            para.textContent = '';
+          })
+          .catch(function (err) {
+            para.textContent = 'Cannot find respective gif';
+          });
+      });
+      fetch(
+        'https://api.giphy.com/v1/gifs/translate?api_key=YSwyquqeO2YWPFbSgHM1g7ZOo6Cm9s2t&s=' +
+          variable,
+        { mode: 'cors' }
+      )
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (response) {
+          img.src = response.data.images.original.url;
+          para.textContent = '';
+        })
+        .catch(function (err) {
+          para.textContent = 'Cannot find respective gif';
+        });
+
+      btn.addEventListener('click', (e) => {
+        img.src = '';
+        e.preventDefault();
+        console.log('hi');
+        fetch(
+          'https://api.giphy.com/v1/gifs/translate?api_key=YSwyquqeO2YWPFbSgHM1g7ZOo6Cm9s2t&s=' +
+            variable,
+          { mode: 'cors' }
+        )
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (response) {
+            img.src = response.data.images.original.url;
+            para.textContent = '';
+          })
+          .catch(function (err) {
+            para.textContent = 'Cannot find respective gif';
+          });
+      });
+    </script>
+  </body>
+</html>
